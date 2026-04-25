@@ -69,9 +69,32 @@ function startIntro() {
 
   let message = "Hello, I'm Riya. I am a web developer and AI enthusiast.";
 
-  // 🔊 Voice
-  let speech = new SpeechSynthesisUtterance(message);
+  // 🔊 Improved Female Voice (Windows + Chrome optimized)
+let speech = new SpeechSynthesisUtterance(message);
+
+function setVoice() {
+  let voices = speechSynthesis.getVoices();
+
+  let femaleVoice =
+    voices.find(v => v.name.toLowerCase().includes("zira")) || // Windows female
+    voices.find(v => v.lang === "en-US") ||
+    voices.find(v => v.name.toLowerCase().includes("female")) ||
+    voices[0];
+
+  speech.voice = femaleVoice;
+  speech.pitch = 1.4;  // 👈 female-like tone
+  speech.rate = 1;
+  speech.volume = 1;
+
   speechSynthesis.speak(speech);
+}
+
+// voices load late hoti hain isliye delay
+if (speechSynthesis.getVoices().length === 0) {
+  speechSynthesis.onvoiceschanged = setVoice;
+} else {
+  setVoice();
+}
 
   // ⌨️ Typing effect
   let i = 0;
