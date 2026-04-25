@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Riya AI</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial;
+  background: #0f172a;
+  color: white;
+  display: flex;
+  justify-content: center;
+}
+
+.container {
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+  padding: 20px;
+}
+
+.dp {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid white;
+  margin-top: 20px;
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 20px;
+  font-size: 18px;
+  border: none;
+  border-radius: 10px;
+  background: #22c55e;
+  color: white;
+}
+
+#text {
+  margin-top: 20px;
+  font-size: 18px;
+  text-align: left;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<img src="dp.jpg" class="dp" onerror="this.src='https://via.placeholder.com/120'">
+
+<h2>Hello, I'm Riya 👋</h2>
+
+<button onclick="startIntro()">▶ Play</button>
+
+<div id="text"></div>
+
+</div>
+
+<script>
+function startIntro() {
+
+  let message = "Hello, I'm Riya. I am a web developer and AI enthusiast.";
+
+  // 🔊 Voice
+  let speech = new SpeechSynthesisUtterance(message);
+  speechSynthesis.speak(speech);
+
+  // ⌨️ Typing effect
+  let i = 0;
+  let text = document.getElementById("text");
+  text.innerHTML = "";
+
+  function typing() {
+    if (i < message.length) {
+      text.innerHTML += message.charAt(i);
+      i++;
+      setTimeout(typing, 30);
+    }
+  }
+
+  typing();
+}
+</script>
+
+</body>
+</html>
